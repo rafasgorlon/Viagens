@@ -1,14 +1,14 @@
 import React from 'react';
 import {
-  View,
   ScrollView,
-  Text,
   StyleSheet,
+  Text,
+  View,
 } from 'react-native';
-import Navbar from '../components/Navbar';
+import AddToTripButton from '../components/AddToTripButton';
 import Footer from '../components/Footer';
 import ImageGallery from '../components/ImageGallery';
-import AddToTripButton from '../components/AddToTripButton';
+import Navbar from '../components/Navbar';
 import { Destination } from '../data/destinations';
 
 interface DestinationDetailProps {

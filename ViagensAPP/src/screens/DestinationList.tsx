@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import {
-  View,
   FlatList,
+  ListRenderItem,
+  StyleSheet,
   Text,
   TextInput,
-  StyleSheet,
   TouchableOpacity,
-  ListRenderItem,
+  View,
 } from 'react-native';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import DestinationCard from '../components/DestinationCard';
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 import { Destination, destinations } from '../data/destinations';
 
 interface DestinationListProps {

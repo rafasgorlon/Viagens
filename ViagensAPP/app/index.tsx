@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, SafeAreaView } from 'react-native';
-import DestinationList from './screens/DestinationList';
-import DestinationDetail from './screens/DestinationDetail';
-import { Destination } from './data/destinations';
+import DestinationList from '../src/screens/DestinationList'
+import DestinationDetail from '../src/screens/DestinationDetail';
+import { Destination } from '../src/data/destinations';
 
 type Screen = 'list' | 'detail';
 
