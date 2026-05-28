@@ -20,9 +20,7 @@ interface FooterProps {
 
 const tabs: FooterTab[] = [
   { id: 'explore', icon: '🌐', label: 'Explorar' },
-  { id: 'trips', icon: '✈', label: 'Viagens' },
-  { id: 'search', icon: '⌕', label: 'Buscar' },
-  { id: 'profile', icon: '◎', label: 'Perfil' },
+
 ];
 
 const Footer: React.FC<FooterProps> = ({
@@ -76,9 +74,9 @@ const styles = StyleSheet.create({
   },
   tabRow: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-evenly',
     paddingVertical: 10,
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
   },
   tab: {
     flex: 1,
@@ -87,9 +85,9 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   iconWrapper: {
-    width: 40,
-    height: 32,
-    borderRadius: 16,
+    width: 48,
+    height: 34,
+    borderRadius: 17,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -97,21 +95,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#1E1E2E',
   },
   tabIcon: {
-    fontSize: 18,
+    fontSize: 19,
     color: '#555555',
   },
   tabIconActive: {
     color: '#E8C547',
   },
   tabLabel: {
-    fontSize: 10,
+    fontSize: 11,
     color: '#555555',
     letterSpacing: 0.5,
     fontWeight: '400',
   },
   tabLabelActive: {
     color: '#E8C547',
-    fontWeight: '600',
+    fontWeight: '700',
   },
   homeIndicator: {
     height: 20,
