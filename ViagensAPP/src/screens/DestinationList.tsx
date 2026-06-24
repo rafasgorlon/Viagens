@@ -17,14 +17,18 @@ import { Destination, destinations } from '../data/destinations';
 
 interface DestinationListProps {
   onSelectDestination: (destination: Destination) => void;
+  onNavigate: (tabId: string) => void;
 }
 
 const FILTERS = ['Todos', 'Europa', 'América', 'África', 'Ásia'];
 
-const DestinationList: React.FC<DestinationListProps> = ({ onSelectDestination }) => {
+const DestinationList: React.FC<DestinationListProps> = ({
+  onSelectDestination,
+  onNavigate,
+}) => {
   const [search, setSearch] = useState('');
   const [activeFilter, setActiveFilter] = useState('Todos');
-  const [activeTab, setActiveTab] = useState('explore');
+ 
 
   const filtered = destinations.filter((d) => {
     const matchSearch =
@@ -147,7 +151,10 @@ const DestinationList: React.FC<DestinationListProps> = ({ onSelectDestination }
         keyboardDismissMode="on-drag"
       />
 
-      <Footer activeTab={activeTab} onTabPress={setActiveTab} />
+<Footer
+  activeTab="explore"
+  onTabPress={onNavigate}
+/>
     </KeyboardAvoidingView>
   );
 };
@@ -194,9 +201,8 @@ const styles = StyleSheet.create({
 
   /* ── Lista ── */
   listContent: {
-    paddingBottom: 16,
-  },
-
+    paddingBottom: 100,
+  },  
   /* ── Cabeçalho da lista ── */
   listHeader: {
     paddingBottom: 12,

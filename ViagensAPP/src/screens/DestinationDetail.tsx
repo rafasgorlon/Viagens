@@ -14,11 +14,15 @@ import { Destination } from '../data/destinations';
 interface DestinationDetailProps {
   destination: Destination;
   onBack: () => void;
+  onAddToTrip: (destination: Destination) => void;
+  onNavigate: (tab: string) => void;
 }
 
 const DestinationDetail: React.FC<DestinationDetailProps> = ({
   destination,
   onBack,
+  onAddToTrip,
+  onNavigate,
 }) => {
   return (
     <View style={styles.screen}>
@@ -102,15 +106,20 @@ const DestinationDetail: React.FC<DestinationDetailProps> = ({
 
         {/* CTA */}
         <AddToTripButton
-          destinationName={destination.city}
-          accentColor={destination.accentColor}
-          baseColor={destination.color}
-        />
+        destination={destination}
+        destinationName={destination.city}
+        accentColor={destination.accentColor}
+        baseColor={destination.color}
+        onAddToTrip={onAddToTrip}
+/>
 
         <View style={styles.bottomPad} />
       </ScrollView>
 
-      <Footer activeTab="explore" />
+      <Footer
+  activeTab="explore"
+  onTabPress={onNavigate}
+/>
     </View>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   TouchableOpacity,
   Text,
@@ -7,22 +7,30 @@ import {
   View,
 } from 'react-native';
 
+import { Destination } from '../data/destinations';
+
 interface AddToTripButtonProps {
+  destination: Destination;
   destinationName: string;
   accentColor: string;
   baseColor: string;
+  onAddToTrip: (destination: Destination) => void;
 }
 
 const AddToTripButton: React.FC<AddToTripButtonProps> = ({
+  destination,
   destinationName,
   accentColor,
   baseColor,
+  onAddToTrip,
 }) => {
   const [added, setAdded] = useState(false);
-  const scaleAnim = new Animated.Value(1);
+
+  const scaleAnim = useRef(
+    new Animated.Value(1)
+  ).current;
 
   const handlePress = () => {
-    // Bounce animation
     Animated.sequence([
       Animated.timing(scaleAnim, {
         toValue: 0.93,
@@ -41,38 +49,76 @@ const AddToTripButton: React.FC<AddToTripButtonProps> = ({
       }),
     ]).start();
 
+    if (!added) {
+      onAddToTrip(destination);
+    }
+
     setAdded((prev) => !prev);
   };
 
   return (
     <View style={styles.wrapper}>
-      <Animated.View style={{ transform: [{ scale: scaleAnim }], flex: 1 }}>
+      <Animated.View
+        style={{
+          transform: [{ scale: scaleAnim }],
+          flex: 1,
+        }}
+      >
         <TouchableOpacity
           style={[
             styles.button,
             added
               ? { backgroundColor: accentColor }
-              : { backgroundColor: 'transparent', borderColor: accentColor, borderWidth: 2 },
+              : {
+                  backgroundColor: 'transparent',
+                  borderColor: accentColor,
+                  borderWidth: 2,
+                },
           ]}
           onPress={handlePress}
-          activeOpacity={0.85}
         >
-          <Text style={[styles.icon, added ? { color: '#0A0A0F' } : { color: accentColor }]}>
+          <Text
+            style={[
+              styles.icon,
+              added
+                ? { color: '#0A0A0F' }
+                : { color: accentColor },
+            ]}
+          >
             {added ? '✓' : '+'}
           </Text>
-          <Text style={[styles.label, added ? { color: '#0A0A0F' } : { color: accentColor }]}>
-            {added ? `${destinationName} adicionado!` : 'Adicionar à viagem'}
+
+          <Text
+            style={[
+              styles.label,
+              added
+                ? { color: '#0A0A0F' }
+                : { color: accentColor },
+            ]}
+          >
+            {added
+              ? `${destinationName} adicionado!`
+              : 'Adicionar à viagem'}
           </Text>
         </TouchableOpacity>
       </Animated.View>
 
       {added && (
         <TouchableOpacity
-          style={[styles.undoButton, { borderColor: baseColor }]}
+          style={[
+            styles.undoButton,
+            { borderColor: baseColor },
+          ]}
           onPress={() => setAdded(false)}
-          activeOpacity={0.7}
         >
-          <Text style={[styles.undoText, { color: baseColor }]}>✕</Text>
+          <Text
+            style={[
+              styles.undoText,
+              { color: baseColor },
+            ]}
+          >
+            ✕
+          </Text>
         </TouchableOpacity>
       )}
     </View>
